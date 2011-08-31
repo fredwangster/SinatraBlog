@@ -11,7 +11,7 @@ class Article
 	property :title, Text, :key => true
 	property :text, Text
 	property :posted_by, String
-	property :permalink, Text
+	property :permalink, Serial
 	property :created_at, DateTime
 	property :updated_at, DateTime
 end
@@ -36,9 +36,8 @@ end
 post '/articles/create' do
 	@article = Article.new  :title      => params[:article_title],
 				:text       => params[:article_text],
-				:posted_by  => params[:article_posted_by],
-				:permalink  => params[:article_title]
-
+				:posted_by  => params[:article_posted_by]
+				
 	if @article.save
 		redirect "/article/#{@article.permalink}"
 	else
